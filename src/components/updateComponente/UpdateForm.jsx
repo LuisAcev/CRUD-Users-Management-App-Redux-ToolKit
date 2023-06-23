@@ -1,0 +1,143 @@
+import React from 'react';
+import { useState } from 'react';
+import {  getFetch, updateFetch } from '../../helpers/fetch';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import { FormControl } from '@mui/material';
+import { useGetFetch } from '../../hooks/useFetch';
+
+
+export default function UpdateForm( { idUpdate, nameUpdate, emailUpdate, genderUpdate, statusUpdate, setOpen } ) {
+
+  const { setChange,change }  = useGetFetch( );
+
+  const[ user, setUser ] = useState (
+    {
+      name:    nameUpdate,
+      email:   emailUpdate,
+      status:  statusUpdate // active or inactive
+    });
+
+    const { name, email,  status} = user
+
+  const handleInputChange = ( e ) =>{
+    e.preventDefault();
+    setUser({ ...user, [e.target.name]:e.target.value })
+     // console.log(e)
+  }   
+
+  // POST the object inside user
+
+    const handleSubmit =(e)=>{
+      e.preventDefault();
+       updateFetch( idUpdate, user, setChange )
+       console.log(change)
+      setOpen(false);
+          
+     }
+
+    return (
+      
+      <form  onSubmit={ handleSubmit }>
+            <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+           '& .MuiTextField-root': { m: 1, width: '25ch' },
+             
+            }}
+            >  
+
+                <TextField
+                error = {false}
+                disabled={true}
+                required 
+                color='info'
+                id="outlined-error-helper-text"
+                label="ID"
+                name='id'
+                value={ idUpdate }
+                style={{ width: 400, background: '#cce0d1',borderRadius: 15 }}
+                onChange= { handleInputChange }
+                variant ='outlined'
+              />
+
+              <TextField
+                error = {false}
+                required 
+                color='info'
+                id="outlined-error-helper-text"
+                label="Name"
+                name='name'
+                value={ name }
+                style={{ width: 400, background: '#cce0d1',borderRadius: 15 }}
+                onChange= { handleInputChange }
+                variant ='outlined'
+              />
+                
+              <TextField
+                error = {false}
+                required
+                color='info'
+                id="outlined-error-helper-text"
+                label="Email"
+                name='email'
+                value={ email }
+                style={{ width: 400, background: '#cce0d1',borderRadius: 15  }}
+                onChange= { handleInputChange }
+                variant ='outlined'
+               />
+
+               <TextField
+                  error = {false}
+                  disabled={true}
+                  required
+                  color='info'
+                  id="outlined-error-helper-text"
+                  select
+                  label="Gender"
+                  name='gender'
+                  value={ genderUpdate }
+                  style={{ width: 400, background: '#cce0d1',borderRadius: 15  }}
+                  onChange= { handleInputChange }
+                  variant ='outlined'
+                  >
+
+                  {<MenuItem value={ "female" }> Female </MenuItem>}
+                  {<MenuItem value={ "male"   }> Male   </MenuItem>}
+
+                </TextField>
+
+                <FormControl></FormControl>
+                <TextField
+                  error = {false}
+                  required
+                  color='info'
+                  id="outlined-error-helper-text"
+                  select
+                  label="Status"
+                  name='status'
+                  value={ status }
+                  style={{ width: 400, background: '#cce0d1',borderRadius: 15  }}
+                  onChange= { handleInputChange }
+                  variant ='outlined'
+                >
+
+                  {<MenuItem value={ "Active" }>    Active </MenuItem>}
+                  {<MenuItem value={ "inactive" }>  Inactive   </MenuItem>}
+
+                </TextField>
+
+                <Button type='submit'  variant="contained" disableElevation
+                        color="success"
+                        style={{ margin:'0 auto', width: 200, alignContent: 'center' }}  
+                         >
+                  Submit
+                </Button>
+
+          </Box>
+      </form>
+    );
+  }
+  
