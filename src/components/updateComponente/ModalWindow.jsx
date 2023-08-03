@@ -18,7 +18,7 @@ const style = {
   p: 4,
 };
 
-export default function ModalWindow( { id, name, email, gender, status } ) {
+export default function ModalWindow( { id, name, email, gender, status, setChange } ) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -36,7 +36,7 @@ export default function ModalWindow( { id, name, email, gender, status } ) {
               style= {{ borderRadius: 15 }} >
           
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            { <UpdateForm idUpdate={id} nameUpdate={name} emailUpdate={email} genderUpdate={gender} statusUpdate={status} setOpen= { setOpen }/> }
+            { <UpdateForm idUpdate={id} nameUpdate={name} emailUpdate={email} genderUpdate={gender} statusUpdate={status} setOpen= { setOpen } setChange = {setChange}/> }
           </Typography>
 
         </Box>

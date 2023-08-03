@@ -13,7 +13,7 @@ import Paper from '@mui/material/Paper';
 import { useGetFetch } from '../../hooks/useFetch';
 import { ButtonGroup, Typography } from '@mui/material';
 import LoupeIcon from '@mui/icons-material/Loupe';
-import { deletFetch, getFetch } from '../../helpers/fetch';
+import { deletFetch } from '../../helpers/fetch';
 import ModalWindow from '../updateComponente/ModalWindow';
 
 
@@ -41,7 +41,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function Ulist() {
 
   
-  const { state ,setChange,change } = useGetFetch( );
+  const { state , setChange } = useGetFetch( );
 
   const navigate = useNavigate();
 
@@ -50,7 +50,6 @@ function Ulist() {
     navigate("/add" , {
       replace:true,
       });
-      console.log(change)
   }
 
   return (
@@ -91,13 +90,12 @@ function Ulist() {
               <StyledTableCell align="center">{row.status}</StyledTableCell>
               <StyledTableCell align="center"> 
               <ButtonGroup variant="outlined" aria-label="outlined button group">
-                    <ModalWindow id={row.id} name={row.name} email={row.email} gender={row.gender} status={row.status} />
-                    {/* <Button variant="contained" color='success'  > <ModalWindow /> </Button> */}
+                    <ModalWindow id={row.id} name={row.name} email={row.email} gender={row.gender} status={row.status} setChange = { setChange } />
+                   
                     <Button variant="contained" 
                             color="error"  
                             startIcon={ <DeleteIcon/> } 
-                            onClick={ ()=> {deletFetch ( row.id )
-                                            getFetch (  setChange )  } }>
+                            onClick={ ()=> deletFetch ( row.id, setChange )}>
                             Delete</Button>
                </ButtonGroup>
               </StyledTableCell>

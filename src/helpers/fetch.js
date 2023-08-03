@@ -33,15 +33,12 @@ export const postFetch = ( user ) => {
   
 
 }).then(response => response.json())
-.then(data => {
-  console.log(data)
-})
-.catch (erro => console.log(erro));
+ .catch (erro => console.log(erro));
 
 }
 
 // Fetch using PUT method 
-export const updateFetch = ( id, user, setState ) => { 
+export const updateFetch = ( id, user, setChange ) => { 
   
   const url = `https://gorest.co.in/public/v2/users/${ id }`;
   fetch( url ,{
@@ -55,7 +52,7 @@ export const updateFetch = ( id, user, setState ) => {
   
 
 }).then(response => response.json())
-.then(data =>  setState(data)
+.then(data =>  setChange(data)
   
 )
 .catch (erro => console.log(erro));
@@ -64,7 +61,7 @@ export const updateFetch = ( id, user, setState ) => {
 
 
 // Fetch using DELETE method 
-export const deletFetch = ( id ) => { 
+export const deletFetch = ( id, setChange ) => { 
   
   const url = `https://gorest.co.in/public/v2/users/${ id }` ;
   fetch( url ,{
@@ -75,7 +72,8 @@ export const deletFetch = ( id ) => {
   },
 
   
-}).then(response => console.log(response))
+})
+.then (data => setChange(data))
 .catch (erro => console.log(erro));
 
 }

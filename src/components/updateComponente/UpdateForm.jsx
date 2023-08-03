@@ -1,17 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
-import {  getFetch, updateFetch } from '../../helpers/fetch';
+import { updateFetch } from '../../helpers/fetch';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { FormControl } from '@mui/material';
-import { useGetFetch } from '../../hooks/useFetch';
 
+export default function UpdateForm( { idUpdate, nameUpdate, emailUpdate, genderUpdate, statusUpdate, setOpen, setChange } ) {
 
-export default function UpdateForm( { idUpdate, nameUpdate, emailUpdate, genderUpdate, statusUpdate, setOpen } ) {
-
-  const { setChange,change }  = useGetFetch( );
 
   const[ user, setUser ] = useState (
     {
@@ -25,7 +22,7 @@ export default function UpdateForm( { idUpdate, nameUpdate, emailUpdate, genderU
   const handleInputChange = ( e ) =>{
     e.preventDefault();
     setUser({ ...user, [e.target.name]:e.target.value })
-     // console.log(e)
+     
   }   
 
   // POST the object inside user
@@ -33,8 +30,7 @@ export default function UpdateForm( { idUpdate, nameUpdate, emailUpdate, genderU
     const handleSubmit =(e)=>{
       e.preventDefault();
        updateFetch( idUpdate, user, setChange )
-       console.log(change)
-      setOpen(false);
+       setOpen(false);
           
      }
 
@@ -131,8 +127,8 @@ export default function UpdateForm( { idUpdate, nameUpdate, emailUpdate, genderU
 
                 <Button type='submit'  variant="contained" disableElevation
                         color="success"
-                        style={{ margin:'0 auto', width: 200, alignContent: 'center' }}  
-                         >
+                        style={{ margin:'0 auto', width: 200, alignContent: 'center' }}
+                        >                         
                   Submit
                 </Button>
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 
-// Fetch using GET method 
+// Fetch using GET method with a custom hook
 export const useGetFetch = () => { 
   
   const url = "https://gorest.co.in/public/v2/users";
@@ -26,7 +26,7 @@ export const useGetFetch = () => {
   },[ change ])
  
 
-return { state, setChange,change } ;
+return { state, setChange, change } ;
 
 }
 
