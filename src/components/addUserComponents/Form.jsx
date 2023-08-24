@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { postFetch } from '../../helpers/fetch';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { FormControl } from '@mui/material';
+import { usePostUsersMutation } from '../../store/api/usersApi';
 
 
 
@@ -14,6 +14,7 @@ import { FormControl } from '@mui/material';
 export default function Form() {
 
   const navigate = useNavigate();
+   
 
   const[ user, setUser ]=useState (
     {
@@ -24,6 +25,7 @@ export default function Form() {
     });
 
     const {name, email, gender, status} = user
+    const [postUsers] = usePostUsersMutation( user );
 
   const handleInputChange = ( e ) =>{
     e.preventDefault();
@@ -35,8 +37,8 @@ export default function Form() {
 
     const handleSubmit =(e)=>{
       e.preventDefault();
-       postFetch( user );
-       navigate("/" , {
+        postUsers(user);
+        navigate("/" , {
         replace:true,
         });
     

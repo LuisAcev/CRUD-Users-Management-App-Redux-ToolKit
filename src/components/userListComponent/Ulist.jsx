@@ -10,11 +10,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useGetFetch } from '../../hooks/useFetch';
 import { ButtonGroup, Typography } from '@mui/material';
 import LoupeIcon from '@mui/icons-material/Loupe';
-import { deletFetch } from '../../helpers/fetch';
 import ModalWindow from '../updateComponente/ModalWindow';
+import { useDeleteUsersMutation, useGetUsersQuery } from '../../store/api/usersApi';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -39,18 +38,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 function Ulist() {
+    const navigate = useNavigate();
 
-  
-  const { state , setChange } = useGetFetch( );
 
-  const navigate = useNavigate();
 
+    // 
+    const { data:state =[] } = useGetUsersQuery(  );  
+     
+     const[ deleteUsers ] = useDeleteUsersMutation();
+     
 
   const handleNewUser = ()=>{
     navigate("/add" , {
       replace:true,
       });
   }
+
 
   return (
     
@@ -90,12 +93,12 @@ function Ulist() {
               <StyledTableCell align="center">{row.status}</StyledTableCell>
               <StyledTableCell align="center"> 
               <ButtonGroup variant="outlined" aria-label="outlined button group">
-                    <ModalWindow id={row.id} name={row.name} email={row.email} gender={row.gender} status={row.status} setChange = { setChange } />
+                     <ModalWindow users = { row }/> {/*send all user to modal window  */}
                    
                     <Button variant="contained" 
                             color="error"  
                             startIcon={ <DeleteIcon/> } 
-                            onClick={ ()=> deletFetch ( row.id, setChange )}>
+                            onClick={ ()=> {deleteUsers ( row.id )}}>
                             Delete</Button>
                </ButtonGroup>
               </StyledTableCell>

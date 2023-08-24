@@ -1,24 +1,26 @@
 import React from 'react';
 import { useState } from 'react';
-import { updateFetch } from '../../helpers/fetch';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { FormControl } from '@mui/material';
+import { useUpdateUsersMutation } from '../../store/api/usersApi';
 
-export default function UpdateForm( { idUpdate, nameUpdate, emailUpdate, genderUpdate, statusUpdate, setOpen, setChange } ) {
+export default function UpdateForm( { users, setOpen } ) {
 
-
+  const [ UpdateUsers ] = useUpdateUsersMutation();
+  
   const[ user, setUser ] = useState (
     {
-      name:    nameUpdate,
-      email:   emailUpdate,
-      status:  statusUpdate // active or inactive
+      id:      users.id,
+      name:    users.name,
+      email:   users.email,
+      gender:  users.gender,
+      status:  users.status // active or inactive
     });
 
-    const { name, email,  status} = user
-
+  const {id, name, email, gender, status} = user
   const handleInputChange = ( e ) =>{
     e.preventDefault();
     setUser({ ...user, [e.target.name]:e.target.value })
@@ -29,7 +31,7 @@ export default function UpdateForm( { idUpdate, nameUpdate, emailUpdate, genderU
 
     const handleSubmit =(e)=>{
       e.preventDefault();
-       updateFetch( idUpdate, user, setChange )
+      UpdateUsers( user, id )
        setOpen(false);
           
      }
@@ -53,7 +55,7 @@ export default function UpdateForm( { idUpdate, nameUpdate, emailUpdate, genderU
                 id="outlined-error-helper-text"
                 label="ID"
                 name='id'
-                value={ idUpdate }
+                value={  users.id }
                 style={{ width: 400, background: '#cce0d1',borderRadius: 15 }}
                 onChange= { handleInputChange }
                 variant ='outlined'
@@ -87,14 +89,14 @@ export default function UpdateForm( { idUpdate, nameUpdate, emailUpdate, genderU
 
                <TextField
                   error = {false}
-                  disabled={true}
                   required
                   color='info'
                   id="outlined-error-helper-text"
                   select
                   label="Gender"
                   name='gender'
-                  value={ genderUpdate }
+                  placeholder={ gender }
+                  value={ gender }
                   style={{ width: 400, background: '#cce0d1',borderRadius: 15  }}
                   onChange= { handleInputChange }
                   variant ='outlined'
@@ -114,6 +116,7 @@ export default function UpdateForm( { idUpdate, nameUpdate, emailUpdate, genderU
                   select
                   label="Status"
                   name='status'
+                  placeholder={ status }
                   value={ status }
                   style={{ width: 400, background: '#cce0d1',borderRadius: 15  }}
                   onChange= { handleInputChange }
