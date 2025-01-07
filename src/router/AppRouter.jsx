@@ -5,8 +5,8 @@ import UserList from "../components/userListComponent/UsersList";
 
 const AppRouter = () => {
   return (
-     // direccion local
-    //  <HashRouter >
+    // direccion local
+    // <HashRouter >
     <HashRouter basename="/LuisAcev/CRUD-Users-Management-App-Redux-ToolKit">
       <Routes>
         <Route path="/" element={<UserList />} />
