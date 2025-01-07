@@ -5,7 +5,7 @@ import UserList from '../components/userListComponent/UsersList';
 
 const AppRouter = () => {
   return (
-    <HashRouter>
+    <HashRouter basename="/CRUD-Users-Management-App-Redux-ToolKit/">
       <Routes>
         <Route path="/" element={<UserList />} />
         <Route path="/add" element={<AddUser />} />
