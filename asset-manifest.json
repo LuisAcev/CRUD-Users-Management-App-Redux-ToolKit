@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/LuisAcev/CRUD-Users-Management-App-Redux-ToolKit/static/css/main.e6c13ad2.css",
-    "main.js": "/LuisAcev/CRUD-Users-Management-App-Redux-ToolKit/static/js/main.fa64d65e.js",
+    "main.js": "/LuisAcev/CRUD-Users-Management-App-Redux-ToolKit/static/js/main.c7031f93.js",
     "index.html": "/LuisAcev/CRUD-Users-Management-App-Redux-ToolKit/index.html",
     "main.e6c13ad2.css.map": "/LuisAcev/CRUD-Users-Management-App-Redux-ToolKit/static/css/main.e6c13ad2.css.map",
-    "main.fa64d65e.js.map": "/LuisAcev/CRUD-Users-Management-App-Redux-ToolKit/static/js/main.fa64d65e.js.map"
+    "main.c7031f93.js.map": "/LuisAcev/CRUD-Users-Management-App-Redux-ToolKit/static/js/main.c7031f93.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.fa64d65e.js"
+    "static/js/main.c7031f93.js"
   ]
 }
